@@ -111,9 +111,9 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(TargetPath) $(SolutionDir)..\musikcube\bin\release\plugins\ /Y
-if not exist "$(SolutionDir)..\musikcube\bin\release\plugins\Milkdrop2" mkdir "$(SolutionDir)..\musikcube\bin\release\plugins\Milkdrop2"
-xcopy $(SolutionDir)resources\Milkdrop2\* $(SolutionDir)..\musikcube\bin\release\plugins\Milkdrop2 /Y /e</Command>
+      <Command>xcopy $(TargetPath) $(SolutionDir)..\musikcube\bin32\release\plugins\ /Y
+if not exist "$(SolutionDir)..\musikcube\bin32\release\plugins\Milkdrop2" mkdir "$(SolutionDir)..\musikcube\bin32\release\plugins\Milkdrop2"
+xcopy $(SolutionDir)resources\Milkdrop2\* $(SolutionDir)..\musikcube\bin32\release\plugins\Milkdrop2 /Y /e</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -163,9 +163,9 @@ xcopy $(SolutionDir)resources\Milkdrop2\* $(SolutionDir)..\musikcube\bin\release
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(TargetPath) $(SolutionDir)..\musikcube\bin\debug\plugins\ /Y
-if not exist "$(SolutionDir)..\musikcube\bin\debug\plugins\Milkdrop2" mkdir "$(SolutionDir)..\musikcube\bin\debug\plugins\Milkdrop2"
-xcopy $(SolutionDir)resources\Milkdrop2\* $(SolutionDir)..\musikcube\bin\debug\plugins\Milkdrop2 /Y /e</Command>
+      <Command>xcopy $(TargetPath) $(SolutionDir)..\musikcube\bin32\debug\plugins\ /Y
+if not exist "$(SolutionDir)..\musikcube\bin32\debug\plugins\Milkdrop2" mkdir "$(SolutionDir)..\musikcube\bin32\debug\plugins\Milkdrop2"
+xcopy $(SolutionDir)resources\Milkdrop2\* $(SolutionDir)..\musikcube\bin32\debug\plugins\Milkdrop2 /Y /e</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

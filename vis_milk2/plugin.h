@@ -38,8 +38,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "state.h"
 #include <vector>
 #include "../ns-eel2/ns-eel.h"
-
-#include <core/sdk/IPlaybackService.h>
+#include <string>
+#include <musikcore/sdk/IPlaybackService.h>
 
 extern "C" int (*warand)(void);
 

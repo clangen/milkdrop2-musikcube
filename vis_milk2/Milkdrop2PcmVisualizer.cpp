@@ -18,9 +18,9 @@
 #include <mutex>
 #include <atomic>
 
-#include <core/sdk/constants.h>
-#include <core/sdk/IPcmVisualizer.h>
-#include <core/sdk/IPlaybackRemote.h>
+#include <musikcore/sdk/constants.h>
+#include <musikcore/sdk/IPcmVisualizer.h>
+#include <musikcore/sdk/IPlaybackRemote.h>
 
 #define DLL_EXPORT __declspec(dllexport)
 #define COMPILE_AS_DLL

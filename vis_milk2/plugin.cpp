@@ -8806,7 +8806,7 @@ void CPlugin::GenCompPShaderText(char *szShaderText, float brightness, float ve_
 void CPlugin::GetSongTitle(wchar_t *szSongTitle, int nSize)
 {
     if (playbackService &&
-        playbackService->GetPlaybackState() == musik::core::sdk::PlaybackStopped)
+        playbackService->GetPlaybackState() == musik::core::sdk::PlaybackState::Stopped)
     {
         emulatedWinampSongTitle = "Playback Stopped";
     }

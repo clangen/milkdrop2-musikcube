@@ -472,7 +472,7 @@ static EEL_F g_closefact = NSEEL_CLOSEFACTOR;
 static const EEL_F eel_zero=0.0, eel_one=1.0;
 
 #if defined(_MSC_VER) && _MSC_VER >= 1400
-static double __floor(double a) { return floor(a); }
+static double ___floor(double a) { return floor(a); }
 #endif
 
 static double eel1band(double a, double b)
@@ -569,7 +569,7 @@ static functionType fnTable1[] = {
 	 { "rand",   nseel_asm_1pp,nseel_asm_1pp_end,  1, {&nseel_int_rand}, } ,
 
 #if defined(_MSC_VER) && _MSC_VER >= 1400
-   { "floor",  nseel_asm_1pdd,nseel_asm_1pdd_end, 1, {&__floor} },
+   { "floor",  nseel_asm_1pdd,nseel_asm_1pdd_end, 1, {&___floor} },
 #else
    { "floor",  nseel_asm_1pdd,nseel_asm_1pdd_end, 1, {&floor} },
 #endif

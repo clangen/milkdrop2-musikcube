@@ -276,7 +276,7 @@ void texmgr::FreeCode(int iSlot)
 void texmgr::RegisterBuiltInVariables(int iSlot)
 {
 	NSEEL_VMCTX eel_ctx = m_tex[iSlot].tex_eel_ctx;
-	NSEEL_VM_resetvars(eel_ctx);
+	NSEEL_VM_remove_all_nonreg_vars(eel_ctx);
 	
 	// input variables
     m_tex[iSlot].var_time        = NSEEL_VM_regvar(eel_ctx, "time");     

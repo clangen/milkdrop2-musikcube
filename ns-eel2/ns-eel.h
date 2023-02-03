@@ -198,7 +198,7 @@ extern int NSEEL_RAM_memused_errors;
 // this mode is faster and uses less ram than eel2.l anyway, so leave it on
 #define NSEEL_SUPER_MINIMAL_LEXER 
 
- // #define NSEEL_EEL1_COMPAT_MODE // supports old behaviors (continue after failed compile), old functions _bnot etc. disables string support (strings were used as comments in eel1 etc)
+#define NSEEL_EEL1_COMPAT_MODE // supports old behaviors (continue after failed compile), old functions _bnot etc. disables string support (strings were used as comments in eel1 etc)
 
 #define NSEEL_MAX_VARIABLE_NAMELEN 128  // define this to override the max variable length
 #define NSEEL_MAX_EELFUNC_PARAMETERS 40

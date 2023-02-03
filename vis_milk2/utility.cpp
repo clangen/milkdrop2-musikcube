@@ -334,6 +334,9 @@ void MissingDirectX(HWND hwnd)
 
 bool CheckForMMX()
 {
+#ifdef _WIN64
+    return true;
+#else
     DWORD bMMX = 0;
     DWORD *pbMMX = &bMMX;
     __try {
@@ -353,6 +356,7 @@ bool CheckForMMX()
 		return true;
 
 	return false;
+#endif
 }
 
 bool CheckForSSE()
@@ -628,7 +632,7 @@ BOOL DoExplorerMenu (HWND hwnd, LPITEMIDLIST pidlMain, POINT point)
                 // restore old wndProc
                 if (g_pOldWndProc)
                 {
-                    SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR)g_pOldWndProc);
+                    SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)g_pOldWndProc);
                 }
 
                 //

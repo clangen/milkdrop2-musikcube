@@ -151,4 +151,7 @@
       <Filter>library\resources</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Object Include="..\ns-eel2\asm-nseel-x64.obj" />
+  </ItemGroup>
 </Project>

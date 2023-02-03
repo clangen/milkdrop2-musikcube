@@ -86,16 +86,18 @@ static void MungeFPCW( WORD *pwOldCW )
     if (pwOldCW) *pwOldCW = wSave;
   //  return ret;
 #else
+#ifndef _WIN64 /* CLCLCL: causes an exception, but seems unnecessary */
 	_controlfp(_PC_24, _MCW_PC); // single precision
+#endif
 	_controlfp(_RC_NEAR, _MCW_RC); // round to nearest mode
 	_controlfp(_EM_ZERODIVIDE, _EM_ZERODIVIDE);  // disable divide-by-zero
 #endif
 }
 
-void RestoreFPCW(WORD wSave)
-{
-    __asm fldcw wSave
-}
+//void RestoreFPCW(WORD wSave)
+//{
+//    __asm fldcw wSave
+//}
 
 int GetNumToSpawn(float fTime, float fDeltaT, float fRate, float fRegularity, int iNumSpawnedSoFar)
 {

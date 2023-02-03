@@ -1890,7 +1890,7 @@ void CPluginShell::RenderBuiltInTextMsgs()
 		}
 
 		// render 'Press F1 for Help' message in lower-right corner:
-		if (_show_press_f1_NOW)
+		if (false && _show_press_f1_NOW) /* CLCLCL: hard disable, not used. */
 		{
 			int dx = (int)(160.0f * powf(m_time/(float)(PRESS_F1_DUR), (float)(PRESS_F1_EXP)));
 			SetRect(&r, m_left_edge, m_lower_right_corner_y - GetFontHeight(DECORATIVE_FONT), m_right_edge + dx, m_lower_right_corner_y);

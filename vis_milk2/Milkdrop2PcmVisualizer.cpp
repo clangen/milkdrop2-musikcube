@@ -299,6 +299,7 @@ unsigned __stdcall CreateWindowAndRun(void* data) {
     int lastHeight = windowHeight;
 
     g_plugin.PluginPreInitialize(0, 0);
+
     InitD3d(hwnd, windowWidth, windowHeight);
 
     g_plugin.PluginInitialize(

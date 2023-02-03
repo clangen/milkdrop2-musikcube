@@ -2729,18 +2729,25 @@ void PShaderInfo::Clear()
 
 // global_CShaderParams_master_list: a master list of all CShaderParams classes in existence.
 //   ** when we evict a texture, we need to NULL out any texptrs these guys have! **
-CShaderParamsList global_CShaderParams_master_list;
+CShaderParamsList* global_CShaderParams_master_list = nullptr;
 CShaderParams::CShaderParams() {
-    global_CShaderParams_master_list.push_back(this);
+    /* CLCLCL: note that global_CShaderParams_master_list was originally defined as a value
+    and not pointer, but it exposed the following compiler bug in debug mode:
+    https://github.com/microsoft/STL/issues/1934 ... so now we just initialize it lazily and
+    deal with the small memory leak. */
+    if (!global_CShaderParams_master_list) {
+        global_CShaderParams_master_list = new CShaderParamsList();
+    }
+    global_CShaderParams_master_list->push_back(this);
 }
 
 CShaderParams::~CShaderParams() {
-    auto first = global_CShaderParams_master_list.begin();
+    auto first = global_CShaderParams_master_list->begin();
 
-    int N = global_CShaderParams_master_list.size();
+    int N = global_CShaderParams_master_list->size();
     for (int i=0; i<N; i++)
-        if (global_CShaderParams_master_list[i] == this)
-            global_CShaderParams_master_list.erase(first + i);
+        if (global_CShaderParams_master_list->at(i) == this)
+            global_CShaderParams_master_list->erase(first + i);
     texsize_params.clear();
 }
 
@@ -2831,9 +2838,9 @@ bool CPlugin::EvictSomeTexture()
     assert(m_textures[biggest_index].texptr);
 
     // notify all CShaderParams classes that we're releasing a bindable texture!!
-    N = global_CShaderParams_master_list.size();
+    N = global_CShaderParams_master_list->size();
     for (i=0; i<N; i++)
-        global_CShaderParams_master_list[i]->OnTextureEvict( m_textures[biggest_index].texptr );
+        global_CShaderParams_master_list->at(i)->OnTextureEvict(m_textures[biggest_index].texptr);
 
     // 2. erase the texture itself
     SafeRelease(m_textures[biggest_index].texptr);
@@ -3777,9 +3784,9 @@ void CPlugin::CleanUpMyDX9Stuff(int final_cleanup)
         if (m_textures[i].texptr)
         {
             // notify all CShaderParams classes that we're releasing a bindable texture!!
-            size_t N = global_CShaderParams_master_list.size();
+            size_t N = global_CShaderParams_master_list->size();
             for (size_t j=0; j<N; j++)
-                global_CShaderParams_master_list[j]->OnTextureEvict( m_textures[i].texptr );
+                global_CShaderParams_master_list->at(j)->OnTextureEvict(m_textures[i].texptr);
 
             SafeRelease(m_textures[i].texptr);
         }

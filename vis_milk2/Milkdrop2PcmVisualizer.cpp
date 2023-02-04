@@ -22,6 +22,10 @@
 #include <musikcore/sdk/IPcmVisualizer.h>
 #include <musikcore/sdk/IPlaybackRemote.h>
 
+#include <winrt/Windows.UI.ViewManagement.h>
+
+using namespace winrt::Windows::UI::ViewManagement;
+
 #define DLL_EXPORT __declspec(dllexport)
 #define COMPILE_AS_DLL
 #define SAMPLE_SIZE 576
@@ -232,8 +236,47 @@ void RenderFrame() {
         (unsigned char*) pcmRightOut);
 }
 
+void ConfigureDpiAwareness() {
+    typedef HRESULT(__stdcall* SetProcessDpiAwarenessProc)(int);
+    static const int ADJUST_DPI_PER_MONITOR = 2;
+
+    HMODULE shcoreDll = LoadLibrary("shcore.dll");
+    if (shcoreDll) {
+        SetProcessDpiAwarenessProc setDpiAwareness =
+            (SetProcessDpiAwarenessProc)GetProcAddress(shcoreDll, "SetProcessDpiAwareness");
+
+        if (setDpiAwareness) {
+            setDpiAwareness(ADJUST_DPI_PER_MONITOR);
+        }
+
+        FreeLibrary(shcoreDll);
+    }
+}
+
+void ConfigureThemeAwareness(HWND mainHwnd) {
+    typedef HRESULT(__stdcall* DwmSetWindowAttributeProc)(HWND, DWORD, LPCVOID, DWORD);
+    static const DWORD DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
+
+    HMODULE dwmapiDll = LoadLibrary("dwmapi.dll");
+    if (dwmapiDll) {
+        DwmSetWindowAttributeProc dwmSetWindowAttribute =
+            (DwmSetWindowAttributeProc)GetProcAddress(dwmapiDll, "DwmSetWindowAttribute");
+
+        if (dwmSetWindowAttribute) {
+            const auto settings = UISettings();
+            const auto foreground = settings.GetColorValue(UIColorType::Foreground);
+            const BOOL isDarkMode = (((5 * foreground.G) + (2 * foreground.R) + foreground.B) > (8 * 128));
+            dwmSetWindowAttribute(mainHwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, &isDarkMode, sizeof(isDarkMode));
+        }
+
+        FreeLibrary(dwmapiDll);
+    }
+}
+
 unsigned __stdcall CreateWindowAndRun(void* data) {
     HINSTANCE instance = (HINSTANCE) data;
+
+    ConfigureDpiAwareness();
 
 #ifdef DEBUG
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -285,6 +328,8 @@ unsigned __stdcall CreateWindowAndRun(void* data) {
         DWORD dwError = GetLastError();
         return 0;
     }
+
+    ConfigureThemeAwareness(hwnd);
 
     if (!icon) {
         icon = LoadIconW(instance, MAKEINTRESOURCEW(IDI_PLUGIN_ICON));

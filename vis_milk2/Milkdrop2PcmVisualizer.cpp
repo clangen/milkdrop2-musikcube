@@ -236,6 +236,13 @@ void RenderFrame() {
         (unsigned char*) pcmRightOut);
 }
 
+bool IsWine() {
+    HMODULE ntdll = LoadLibrary("ntdll.dll");
+    bool result = ntdll != nullptr && GetProcAddress(ntdll, "wine_get_version") != nullptr;
+    FreeLibrary(ntdll);
+    return result;
+}
+
 void ConfigureDpiAwareness() {
     typedef HRESULT(__stdcall* SetProcessDpiAwarenessProc)(int);
     static const int ADJUST_DPI_PER_MONITOR = 2;
@@ -254,6 +261,10 @@ void ConfigureDpiAwareness() {
 }
 
 void ConfigureThemeAwareness(HWND mainHwnd) {
+    if (IsWine()) {
+        return;
+    }
+
     typedef HRESULT(__stdcall* DwmSetWindowAttributeProc)(HWND, DWORD, LPCVOID, DWORD);
     static const DWORD DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
 

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -27,22 +27,22 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -73,14 +73,10 @@
     <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\intermediates\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
-    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
-    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)\Lib\x64;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\output\</OutDir>
     <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\intermediates\</IntDir>
   </PropertyGroup>
@@ -88,13 +84,9 @@
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\output\</OutDir>
     <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\intermediates\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)\Lib\x64;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\output\</OutDir>
     <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\intermediates\</IntDir>
   </PropertyGroup>
@@ -149,11 +141,6 @@
       <DataExecutionPrevention />
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy $(TargetPath) $(SolutionDir)..\musikcube\bin32\release\plugins\ /Y
-if not exist "$(SolutionDir)..\musikcube\bin32\release\plugins\Milkdrop2" mkdir "$(SolutionDir)..\musikcube\bin32\release\plugins\Milkdrop2"
-xcopy $(SolutionDir)resources\Milkdrop2\* $(SolutionDir)..\musikcube\bin32\release\plugins\Milkdrop2 /Y /e</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -207,11 +194,6 @@ xcopy $(SolutionDir)resources\Milkdrop2\* $(SolutionDir)..\musikcube\bin32\relea
       <DataExecutionPrevention>
       </DataExecutionPrevention>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy $(TargetPath) $(SolutionDir)..\musikcube\bin64\release\plugins\ /Y
-if not exist "$(SolutionDir)..\musikcube\bin64\release\plugins\Milkdrop2" mkdir "$(SolutionDir)..\musikcube\bin64\release\plugins\Milkdrop2"
-xcopy $(SolutionDir)resources\Milkdrop2\* $(SolutionDir)..\musikcube\bin64\release\plugins\Milkdrop2 /Y /e</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -257,11 +239,6 @@ xcopy $(SolutionDir)resources\Milkdrop2\* $(SolutionDir)..\musikcube\bin64\relea
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy $(TargetPath) $(SolutionDir)..\musikcube\bin32\debug\plugins\ /Y
-if not exist "$(SolutionDir)..\musikcube\bin32\debug\plugins\Milkdrop2" mkdir "$(SolutionDir)..\musikcube\bin32\debug\plugins\Milkdrop2"
-xcopy $(SolutionDir)resources\Milkdrop2\* $(SolutionDir)..\musikcube\bin32\debug\plugins\Milkdrop2 /Y /e</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -308,11 +285,6 @@ xcopy $(SolutionDir)resources\Milkdrop2\* $(SolutionDir)..\musikcube\bin32\debug
       </DataExecutionPrevention>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy $(TargetPath) $(SolutionDir)..\musikcube\bin64\debug\plugins\ /Y
-if not exist "$(SolutionDir)..\musikcube\bin64\debug\plugins\Milkdrop2" mkdir "$(SolutionDir)..\musikcube\bin64\debug\plugins\Milkdrop2"
-xcopy $(SolutionDir)resources\Milkdrop2\* $(SolutionDir)..\musikcube\bin64\debug\plugins\Milkdrop2 /Y /e</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Object Include="..\ns-eel2\asm-nseel-x64.obj">
@@ -331,7 +303,10 @@ xcopy $(SolutionDir)resources\Milkdrop2\* $(SolutionDir)..\musikcube\bin64\debug
     <ClCompile Include="dxcontext.cpp" />
     <ClCompile Include="fft.cpp" />
     <ClCompile Include="menu.cpp" />
-    <ClCompile Include="Milkdrop2PcmVisualizer.cpp" />
+    <ClCompile Include="Milkdrop2PcmVisualizer.cpp">
+      <!-- C++/WinRT uses standard coroutines in C++20 mode. -->
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
     <ClCompile Include="milkdropfs.cpp" />
     <ClCompile Include="plugin.cpp" />
     <ClCompile Include="pluginshell.cpp" />
@@ -370,6 +345,35 @@ xcopy $(SolutionDir)resources\Milkdrop2\* $(SolutionDir)..\musikcube\bin64\debug
   <ItemGroup>
     <None Include="text1.bin" />
   </ItemGroup>
+  <PropertyGroup>
+    <D3DXRoot>$(MSBuildThisFileDirectory)..\packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\</D3DXRoot>
+    <D3DXArchitecture Condition="'$(Platform)'=='Win32'">x86</D3DXArchitecture>
+    <D3DXArchitecture Condition="'$(Platform)'=='x64'">x64</D3DXArchitecture>
+    <MusikcubeBin Condition="'$(Platform)'=='Win32'">bin32</MusikcubeBin>
+    <MusikcubeBin Condition="'$(Platform)'=='x64'">bin64</MusikcubeBin>
+    <MusikcubeOutput>$(MSBuildThisFileDirectory)..\..\musikcube\$(MusikcubeBin)\$(Configuration)\</MusikcubeOutput>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(D3DXRoot)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(D3DXRoot)release\lib\$(D3DXArchitecture);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <MilkdropResource Include="$(MSBuildThisFileDirectory)..\resources\Milkdrop2\**\*" />
+    <D3DXRuntime Include="$(D3DXRoot)release\bin\$(D3DXArchitecture)\D3DX9_43.dll;$(D3DXRoot)release\bin\$(D3DXArchitecture)\D3DCompiler_43.dll" />
+  </ItemGroup>
+  <Target Name="CheckD3DXPackage" BeforeTargets="PrepareForBuild">
+    <Error Condition="!Exists('$(D3DXRoot)include\d3dx9.h')" Text="Restore the D3DX package with MSBuild /restore /p:RestorePackagesConfig=true before building." />
+  </Target>
+  <Target Name="StageMilkdrop" AfterTargets="Build">
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(MusikcubeOutput)plugins" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(MilkdropResource)" DestinationFiles="@(MilkdropResource->'$(MusikcubeOutput)plugins\Milkdrop2\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(D3DXRuntime)" DestinationFolder="$(MusikcubeOutput)" SkipUnchangedFiles="true" />
+  </Target>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
